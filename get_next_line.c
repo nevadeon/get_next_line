@@ -6,36 +6,46 @@
 /*   By: ndavenne <ndavenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:40:37 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/03/14 20:08:32 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:46:02 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+static char	*_free(char *s)
+{
+	free(s);
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
-	static char	*buffer = NULL;
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*line;
-	size_t		read_bytes;
+	size_t		line_len;
+	ssize_t		read_bytes;
 
-	if (buffer == NULL)
+	line = (char *) malloc(sizeof(char));
+	if (line == NULL)
+		return (NULL);
+	line[0] = '\0';
+	while (!ft_strchr(line, '\n'))
 	{
-		buffer = (char *) malloc(sizeof(char) * (1));
-		if (buffer == NULL)
+		line_len = ft_strlen(line);
+		line = realloc(line, line_len + BUFFER_SIZE + 1);
+		if (line == NULL)
 			return (NULL);
-		buffer[0] = '\0';
-	}
-	while (ft_strchr(buffer, '\n'))
-	{
-		buffer = realloc(buffer, ft_strlen(buffer) + BUFFER_SIZE + 1);
-		read_bytes = read(fd, (buffer + ft_strlen(buffer)), BUFFER_SIZE);
-		if (read_bytes == -1)
+		if (buffer[0] != '\0')
+			ft_strcpy(line, buffer);
+		else
 		{
-			free(buffer);
-			return (NULL);
+			read_bytes = read(fd, (line + line_len), BUFFER_SIZE);
+			if (read_bytes == -1)
+				return (_free(line));
+			line[line_len + read_bytes] = '\0';
 		}
-		buffer[ft_strlen(buffer) + BUFFER_SIZE] = '\0';
 	}
+	ft_trim_extra(buffer, line, '\n');
 	return (line);
 }
 
@@ -47,6 +57,8 @@ int	main(void)
 	fd = open("test.txt", O_RDONLY);
 	line = get_next_line(fd);
 	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);	
 	free(line);
 	close(fd);
 	return (0);

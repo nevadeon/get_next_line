@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:40:39 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/03/14 19:48:22 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:47:17 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ typedef struct s_fdline
 }	t_fdline;
 
 char	*get_next_line(int fd);
-int		ft_strchr(char *s, char c);
-void	ft_strcat(char *d, char *s);
-int		slen(const char *s);
-void	*ft_memcpy(void *dest, const void *src, int n);
+char	*ft_strchr(char *s, int c);
+size_t	ft_strlen(const char *s);
+void	ft_trim_extra(char *buffer, char *line, char c);
+void	ft_strcpy(char *d, char *s);
 
 #endif

@@ -6,43 +6,28 @@
 /*   By: ndavenne <ndavenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:40:34 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/03/14 20:09:29 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:48:58 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchr(char *s, char c)
+char	*ft_strchr(char *s, int c)
 {
-	if (!s)
-		return (1);
 	while (*s)
 	{
 		if (*s == c)
-			return (1);
+			return (s);
 		s++;
 	}
 	if (c == '\0')
-		return (1);
-	return (0);
+		return (s);
+	return (NULL);
 }
 
-void	ft_strcat(char *d, char *s)
+size_t	ft_strlen(const char *s)
 {
-	while (*d)
-		d++;
-	while (*s)
-	{
-		*d = *s;
-		d++;
-		s++;
-	}
-	*d = '\0';
-}
-
-int	ft_strlen(const char *s)
-{
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
@@ -50,16 +35,26 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-void	*ft_memcpy(void *dest, const void *src, int n)
+void	ft_trim_extra(char *buffer, char *line, char c)
 {
-	const unsigned char	*s;
-	unsigned char		*d;
+	char	*end_line;
+	int		i;
 
-	if (n != 0 && (dest == src))
-		return (dest);
-	s = (const unsigned char *)src;
-	d = (unsigned char *)dest;
-	while (n--)
+	i = 0;
+	end_line = ft_strchr(line, c) + 1;
+	while (end_line[i] !='\0')
+		*buffer++ = end_line[i++];
+	*buffer = '\0';
+	*end_line = '\0';
+}
+
+void	ft_strcpy(char *d, char *s)
+{
+	char	*s_cpy;
+
+	s_cpy = s;
+	while (*s != '\0')
 		*d++ = *s++;
-	return (dest);
+	*d = '\0';
+	*s_cpy = '\0';
 }
