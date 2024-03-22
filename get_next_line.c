@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:40:37 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/03/17 20:46:02 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:02:48 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ char	*get_next_line(int fd)
 
 int	main(void)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	fd = open("test.txt", O_RDONLY);
 	line = get_next_line(fd);
 	printf("%s", line);
 	line = get_next_line(fd);
-	printf("%s", line);	
+	printf("%s", line);
 	free(line);
 	close(fd);
 	return (0);

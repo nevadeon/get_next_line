@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:40:34 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/03/17 20:48:58 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:02:37 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_trim_extra(char *buffer, char *line, char c)
 
 	i = 0;
 	end_line = ft_strchr(line, c) + 1;
-	while (end_line[i] !='\0')
+	while (end_line[i] != '\0')
 		*buffer++ = end_line[i++];
 	*buffer = '\0';
 	*end_line = '\0';
