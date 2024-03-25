@@ -6,7 +6,7 @@
 /*   By: ndavenne <ndavenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:40:39 by ndavenne          #+#    #+#             */
-/*   Updated: 2024/03/17 20:47:17 by ndavenne         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:22:37 by ndavenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 3
 # endif
 
 typedef int				t_bool;
@@ -34,7 +33,5 @@ typedef struct s_fdline
 char	*get_next_line(int fd);
 char	*ft_strchr(char *s, int c);
 size_t	ft_strlen(const char *s);
-void	ft_trim_extra(char *buffer, char *line, char c);
-void	ft_strcpy(char *d, char *s);
 
 #endif
